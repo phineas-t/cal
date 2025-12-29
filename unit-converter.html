@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5241710070882300"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Unit Converter — Calcify</title>
+    <meta
+      name="description"
+      content="Convert common units of measure, including length, mass, temperature, area, and volume."
+    />
+    <style>
+      /* 1. GLOBAL RESET (Ensures consistent box sizing) */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2563eb;
+        --bg1: #e0eafb;
+        --bg2: #f7f9fc;
+        --card-bg: rgba(255, 255, 255, 0.95);
+        --muted: #666;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: linear-gradient(135deg, var(--bg1), var(--bg2));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #222;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* 2. HEADER STYLES (Consistent across all tools) */
+      header {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand strong {
+        color: var(--primary);
+        font-size: 36px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+
+      /* 3. CARD LAYOUT (Consistent across all tools) */
+      .wrap {
+        max-width: 520px;
+        width: 100%;
+        padding: 30px 18px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        justify-content: center;
+      }
+
+      .card {
+        width: 100%;
+        background: var(--card-bg);
+        padding: 32px;
+        border-radius: 14px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+      }
+
+      h2 {
+        margin: 0 0 16px 0;
+        font-size: 24px;
+        color: #111;
+        text-align: center;
+      }
+
+      /* Input and Select Styling (Consistent) */
+      label {
+        display: block;
+        font-weight: 600;
+        margin-top: 16px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #dbe6f2;
+        margin-top: 6px;
+        font-size: 16px;
+        font-family: inherit;
+        transition: border-color 0.2s;
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: white;
+      }
+
+      input[type="number"]:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+
+      /* Result Display */
+      .out {
+        margin-top: 24px;
+        padding: 18px;
+        background: #eff6ff;
+        border-radius: 10px;
+        border: 1px solid #dbeafe;
+        color: #1e40af;
+        font-size: 18px;
+        text-align: center;
+        display: none;
+      }
+
+      .out strong {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.5em;
+      }
+
+      .links {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .links a:hover {
+        color: var(--primary);
+      }
+
+      footer {
+        margin-top: auto;
+        padding: 24px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+        width: 100%;
+      }
+
+      .flex-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      .flex-group > div {
+        flex: 1;
+      }
+
+      #category {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" style="text-decoration: none">
+        <div class="brand">
+          <svg
+            width="42"
+            height="42"
+            viewBox="0 0 64 64"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient
+                id="brandGradient"
+                x1="32"
+                y1="4"
+                x2="32"
+                y2="60"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#4F86F7" />
+                <stop offset="1" stop-color="#2563EB" />
+              </linearGradient>
+              <filter
+                id="softShadow"
+                x="0"
+                y="0"
+                width="64"
+                height="64"
+                filterUnits="userSpaceOnUse"
+              >
+                <feDropShadow
+                  dx="0"
+                  dy="4"
+                  stdDeviation="3"
+                  flood-opacity="0.15"
+                />
+              </filter>
+            </defs>
+            <rect
+              x="12"
+              y="8"
+              width="40"
+              height="52"
+              rx="10"
+              fill="url(#brandGradient)"
+              filter="url(#softShadow)"
+            />
+            <rect
+              x="18"
+              y="16"
+              width="28"
+              height="10"
+              rx="3"
+              fill="white"
+              fill-opacity="0.9"
+            />
+            <circle cx="22" cy="36" r="3.5" fill="white" fill-opacity="0.9" />
+            <circle cx="32" cy="36" r="3.5" fill="white" fill-opacity="0.9" />
+            <circle cx="42" cy="36" r="3.5" fill="white" fill-opacity="0.9" />
+            <circle cx="22" cy="47" r="3.5" fill="white" fill-opacity="0.9" />
+            <circle cx="32" cy="47" r="3.5" fill="white" fill-opacity="0.9" />
+            <circle cx="42" cy="47" r="3.5" fill="white" fill-opacity="0.9" />
+          </svg>
+
+          <strong>Calcify</strong>
+        </div>
+      </a>
+    </header>
+
+    <div class="wrap">
+      <div class="card">
+        <h2>Unit Converter</h2>
+
+        <label for="category">Select Category</label>
+        <select id="category" onchange="updateUnits()">
+          <option value="length">Length</option>
+          <option value="mass">Mass</option>
+          <option value="temperature">Temperature</option>
+          <option value="area">Area</option>
+          <option value="volume">Volume</option>
+        </select>
+
+        <div class="input-group">
+          <label for="value">Value</label>
+          <input
+            id="value"
+            type="number"
+            step="any"
+            value="1"
+            placeholder="Enter value"
+            oninput="convertUnit()"
+          />
+        </div>
+
+        <div class="flex-group">
+          <div>
+            <label for="unit-from">From</label>
+            <select id="unit-from" onchange="convertUnit()"></select>
+          </div>
+          <div>
+            <label for="unit-to">To</label>
+            <select id="unit-to" onchange="convertUnit()"></select>
+          </div>
+        </div>
+
+        <div id="out" class="out"></div>
+
+        <div class="links">
+          <a href="index.html">← Back to tools</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>© 2025 Calcify</footer>
+
+    <script>
+      const out = document.getElementById("out");
+      const categorySelect = document.getElementById("category");
+      const valueInput = document.getElementById("value");
+      const unitFromSelect = document.getElementById("unit-from");
+      const unitToSelect = document.getElementById("unit-to");
+
+      // Conversion factors (factor: value relative to base unit)
+      const conversionFactors = {
+        // Base Unit: meter (1)
+        length: {
+          meter: { name: "Meter", factor: 1 },
+          kilometer: { name: "Kilometer", factor: 1000 },
+          centimeter: { name: "Centimeter", factor: 0.01 },
+          millimeter: { name: "Millimeter", factor: 0.001 },
+          mile: { name: "Mile", factor: 1609.34 },
+          yard: { name: "Yard", factor: 0.9144 },
+          foot: { name: "Foot", factor: 0.3048 },
+          inch: { name: "Inch", factor: 0.0254 },
+        },
+        // Base Unit: kilogram (1)
+        mass: {
+          kilogram: { name: "Kilogram", factor: 1 },
+          gram: { name: "Gram", factor: 0.001 },
+          milligram: { name: "Milligram", factor: 0.000001 },
+          metric_ton: { name: "Metric Ton", factor: 1000 },
+          pound: { name: "Pound (lb)", factor: 0.453592 },
+          ounce: { name: "Ounce (oz)", factor: 0.0283495 },
+        },
+        // Base Unit: Square meter (1) - Uses power: 2
+        area: {
+          sq_meter: { name: "Square Meter", factor: 1 },
+          sq_kilometer: { name: "Square Kilometer", factor: 1000 },
+          sq_centimeter: { name: "Square Centimeter", factor: 0.01 },
+          sq_mile: { name: "Square Mile", factor: 1609.34 },
+          sq_yard: { name: "Square Yard", factor: 0.9144 },
+          sq_foot: { name: "Square Foot", factor: 0.3048 },
+          sq_inch: { name: "Square Inch", factor: 0.0254 },
+          hectare: { name: "Hectare", factor: 10000 },
+          acre: { name: "Acre", factor: 63.6149405608 }, // Acre to Meter factor
+        },
+        // Base Unit: Cubic meter (1) - Uses power: 3
+        volume: {
+          cubic_meter: { name: "Cubic Meter", factor: 1 },
+          cubic_foot: { name: "Cubic Foot", factor: 0.3048 },
+          liter: { name: "Liter", factor: 0.1 }, // 10cm x 10cm x 10cm cube = 0.1m factor for base length
+          gallon_us: { name: "US Gallon", factor: 0.378541 }, // 0.378541 m^3 = 378.541 Liters
+          milliliter: { name: "Milliliter", factor: 0.001 }, // 1cm factor for base length
+        },
+        // Special case: Requires formula, not simple factor multiplication
+        temperature: {
+          celsius: { name: "Celsius", factor: 1 },
+          fahrenheit: { name: "Fahrenheit", factor: 1 },
+          kelvin: { name: "Kelvin", factor: 1 },
+        },
+      };
+
+      // --- Temperature Conversion Logic (Special Case) ---
+      function convertTemperature(value, fromUnit, toUnit) {
+        let celsiusValue;
+
+        // 1. Convert initial value to the base unit (Celsius)
+        switch (fromUnit) {
+          case "celsius":
+            celsiusValue = value;
+            break;
+          case "fahrenheit":
+            celsiusValue = (value - 32) * (5 / 9);
+            break;
+          case "kelvin":
+            celsiusValue = value - 273.15;
+            break;
+          default:
+            return NaN;
+        }
+
+        // 2. Convert Celsius to the target unit
+        switch (toUnit) {
+          case "celsius":
+            return celsiusValue;
+          case "fahrenheit":
+            return celsiusValue * (9 / 5) + 32;
+          case "kelvin":
+            return celsiusValue + 273.15;
+          default:
+            return NaN;
+        }
+      }
+
+      // --- Main Conversion Logic ---
+      function updateUnits() {
+        const category = categorySelect.value;
+        const units = conversionFactors[category];
+
+        unitFromSelect.innerHTML = "";
+        unitToSelect.innerHTML = "";
+
+        for (const key in units) {
+          const unit = units[key];
+          const optionFrom = new Option(unit.name, key);
+          const optionTo = new Option(unit.name, key);
+          unitFromSelect.add(optionFrom);
+          unitToSelect.add(optionTo);
+        }
+
+        // Ensure conversion runs after units are updated
+        convertUnit();
+      }
+
+      function convertUnit() {
+        out.style.display = "none";
+        const category = categorySelect.value;
+        const inputVal = parseFloat(valueInput.value);
+        const unitFromKey = unitFromSelect.value;
+        const unitToKey = unitToSelect.value;
+
+        if (isNaN(inputVal)) {
+          out.innerHTML = "Please enter a valid number.";
+          out.style.display = "block";
+          return;
+        }
+
+        let result;
+
+        if (category === "temperature") {
+          // Use special temperature logic
+          result = convertTemperature(inputVal, unitFromKey, unitToKey);
+        } else {
+          // Logic for Length, Mass, Area, Volume (linear conversions)
+          const factorFrom = conversionFactors[category][unitFromKey].factor;
+          const factorTo = conversionFactors[category][unitToKey].factor;
+
+          let power = 1;
+          if (category === "area") power = 2; // Factor is squared for area
+          if (category === "volume") power = 3; // Factor is cubed for volume
+
+          const factorFromPowered = Math.pow(factorFrom, power);
+          const factorToPowered = Math.pow(factorTo, power);
+
+          // 1. Convert initial value to the base unit (e.g., Kilogram)
+          const baseValue = inputVal * factorFromPowered;
+
+          // 2. Convert base value to the target unit
+          result = baseValue / factorToPowered;
+        }
+
+        // Display result
+        if (isNaN(result)) {
+          showError("Conversion failed. Check inputs.");
+          return;
+        }
+
+        const nameFrom = conversionFactors[category][unitFromKey].name;
+        const nameTo = conversionFactors[category][unitToKey].name;
+        showResult(inputVal, nameFrom, result, nameTo);
+      }
+
+      function showResult(inputVal, nameFrom, result, nameTo) {
+        // Format result: toFixed(8) to handle precision, then remove trailing zeros
+        const formattedResult = result.toFixed(8).replace(/\.?0+$/, "");
+        out.innerHTML = `
+              ${inputVal} ${nameFrom} = 
+              <br>
+              <strong style="font-size: 1.8em;">${formattedResult} ${nameTo}</strong>
+          `;
+        out.style.display = "block";
+      }
+
+      function showError(msg) {
+        out.style.display = "block";
+        out.style.background = "#fff4f4";
+        out.style.color = "#991b1b";
+        out.style.borderColor = "#fecaca";
+        out.innerText = msg;
+      }
+
+      // Initialize the converter on page load
+      window.onload = () => {
+        // Set default category to Length and load units
+        categorySelect.value = "length";
+        updateUnits();
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5241710070882300"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Percentage Calculator — Calcify</title>
+    <meta
+      name="description"
+      content="Calculate three common percentage problems: what is X% of Y, X is what percent of Y, and percentage change."
+    />
+    <style>
+      /* 1. GLOBAL RESET (Copied from calculator.html) */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2563eb;
+        --bg1: #e0eafb; /* Use softer background colors for consistency */
+        --bg2: #f7f9fc;
+        --card-bg: rgba(255, 255, 255, 0.95);
+        --muted: #666;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: linear-gradient(135deg, var(--bg1), var(--bg2));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #222;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* 2. HEADER STYLES (Copied from calculator.html) */
+      header {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand strong {
+        color: var(--primary);
+        font-size: 36px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+
+      /* 3. CARD LAYOUT (Modified from bmi.html) */
+      .wrap {
+        max-width: 520px;
+        width: 100%;
+        /* Adjusted vertical padding for better fit */
+        padding: 30px 18px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        justify-content: center;
+      }
+
+      .card {
+        width: 100%;
+        background: var(--card-bg);
+        padding: 32px;
+        border-radius: 14px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+      }
+
+      h2 {
+        margin: 0 0 16px 0;
+        font-size: 24px;
+        color: #111;
+        text-align: center;
+      }
+
+      /* New style for segmented control (radio buttons) */
+      .tabs {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding: 4px;
+        background: #f1f5f9;
+        border-radius: 10px;
+      }
+
+      .tab-radio {
+        display: none;
+      }
+
+      .tab-label {
+        flex-grow: 1;
+        text-align: center;
+        padding: 10px 5px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #64748b;
+        transition: background 0.2s, color 0.2s;
+      }
+
+      .tab-radio:checked + .tab-label {
+        background: var(--primary);
+        color: white;
+        box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+      }
+
+      /* INPUT STYLES (Copied from bmi.html) */
+      label {
+        display: block;
+        font-weight: 600;
+        margin-top: 16px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #dbe6f2;
+        margin-top: 6px;
+        font-size: 16px;
+        font-family: inherit;
+        transition: border-color 0.2s;
+      }
+
+      input[type="number"]:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+
+      /* Specific input layout for inline numbers and symbols */
+      .input-group {
+        display: flex;
+        align-items: center;
+        margin-top: 6px;
+        gap: 8px;
+      }
+
+      .input-group input {
+        flex: 1;
+        margin-top: 0;
+      }
+
+      .symbol {
+        font-weight: 600;
+        color: #333;
+        font-size: 1.2em;
+        width: 20px;
+        text-align: right;
+      }
+
+      button {
+        margin-top: 24px;
+        width: 100%;
+        padding: 14px;
+        border-radius: 10px;
+        border: none;
+        background: var(--primary);
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      button:hover {
+        background: #1d4ed8;
+      }
+
+      .out {
+        margin-top: 20px;
+        padding: 16px;
+        background: #eff6ff;
+        border-radius: 10px;
+        border: 1px solid #dbeafe;
+        color: #1e40af;
+        font-size: 16px;
+        line-height: 1.5;
+        display: none;
+      }
+
+      .out strong {
+        font-weight: 700;
+      }
+
+      .links {
+        margin-top: 16px;
+        text-align: center;
+      }
+
+      .links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .links a:hover {
+        color: var(--primary);
+      }
+
+      footer {
+        margin-top: auto;
+        padding: 24px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="index.html" style="text-decoration: none">
+        <div class="brand">
+          <svg
+            width="42"
+            height="42"
+            viewBox="0 0 64 64"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <linearGradient
+                id="brandGradient"
+                x1="32"
+                y1="4"
+                x2="32"
+                y2="60"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#4F86F7" />
+                <stop offset="1" stop-color="#2563EB" />
+              </linearGradient>
+              <filter
+                id="softShadow"
+                x="0"
+                y="0"
+                width="64"
+                height="64"
+                filterUnits="userSpaceOnUse"
+              >
+                <feDropShadow
+                  dx="0"
+                  dy="4"
+                  stdDeviation="3"
+                  flood-opacity="0.15"
+                />
+              </filter>
+            </defs>
+            <rect
+              x="12"
+              y="8"
+              width="40"
+              height="52"
+              rx="10"
+              fill="url(#brandGradient)"
+              filter="url(#softShadow)"
+            />
+            <rect
+              x="18"
+              y="16"
+              width="28"
+              height="10"
+              rx="3"
+              fill="white"
+              fill-opacity="0.9"
+            />
+            <circle cx="22" cy="36" r="3.5" fill="white" fill-opacity="0.9" />
+            <circle cx="32" cy="36" r="3.5" fill="white" fill-opacity="0.9" />
+            <circle cx="42" cy="36" r="3.5" fill="white" fill-opacity="0.9" />
+            <circle cx="22" cy="47" r="3.5" fill="white" fill-opacity="0.9" />
+            <circle cx="32" cy="47" r="3.5" fill="white" fill-opacity="0.9" />
+            <circle cx="42" cy="47" r="3.5" fill="white" fill-opacity="0.9" />
+          </svg>
+
+          <strong>Calcify</strong>
+        </div>
+      </a>
+    </header>
+
+    <div class="wrap">
+      <div class="card">
+        <h2>Percentage Calculator</h2>
+
+        <div class="tabs">
+          <input
+            type="radio"
+            id="tab1"
+            name="percent_mode"
+            class="tab-radio"
+            value="x_of_y"
+            checked
+          />
+          <label for="tab1" class="tab-label">X% of Y</label>
+
+          <input
+            type="radio"
+            id="tab2"
+            name="percent_mode"
+            class="tab-radio"
+            value="x_is_what_percent"
+          />
+          <label for="tab2" class="tab-label">X is % of Y</label>
+
+          <input
+            type="radio"
+            id="tab3"
+            name="percent_mode"
+            class="tab-radio"
+            value="change"
+          />
+          <label for="tab3" class="tab-label">Change</label>
+        </div>
+
+        <div id="mode1" class="input-mode">
+          <label>What is</label>
+          <div class="input-group">
+            <input id="p1_x" type="number" step="0.01" placeholder="e.g. 10" />
+            <span class="symbol">% of</span>
+          </div>
+          <label>Number (Y)</label>
+          <input id="p1_y" type="number" step="0.01" placeholder="e.g. 150" />
+        </div>
+
+        <div id="mode2" class="input-mode" style="display: none">
+          <label>Value (X)</label>
+          <input id="p2_x" type="number" step="0.01" placeholder="e.g. 30" />
+          <label>Base Number (Y)</label>
+          <input id="p2_y" type="number" step="0.01" placeholder="e.g. 120" />
+        </div>
+
+        <div id="mode3" class="input-mode" style="display: none">
+          <label>Initial Value</label>
+          <input
+            id="p3_initial"
+            type="number"
+            step="0.01"
+            placeholder="e.g. 50"
+          />
+          <label>Final Value</label>
+          <input
+            id="p3_final"
+            type="number"
+            step="0.01"
+            placeholder="e.g. 75"
+          />
+        </div>
+
+        <button onclick="calcPercent()">Calculate</button>
+
+        <div id="out" class="out"></div>
+
+        <div class="links">
+          <a href="index.html">← Back to tools</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>© 2025 Calcify</footer>
+
+    <script>
+      const out = document.getElementById("out");
+      const modes = {
+        x_of_y: document.getElementById("mode1"),
+        x_is_what_percent: document.getElementById("mode2"),
+        change: document.getElementById("mode3"),
+      };
+
+      const radioButtons = document.getElementsByName("percent_mode");
+
+      // Function to switch between calculator modes
+      function switchMode(mode) {
+        for (let key in modes) {
+          modes[key].style.display = key === mode ? "block" : "none";
+        }
+        out.style.display = "none";
+      }
+
+      // Add event listeners to radio buttons to switch modes
+      radioButtons.forEach((radio) => {
+        radio.addEventListener("change", (e) => {
+          switchMode(e.target.value);
+        });
+      });
+
+      function validate(value, name) {
+        const num = parseFloat(value);
+        if (isNaN(num)) {
+          showError(`Please enter a valid number for ${name}.`);
+          return null;
+        }
+        return num;
+      }
+
+      function showResult(html) {
+        out.innerHTML = html;
+        out.style.background = "#eff6ff";
+        out.style.borderColor = "#dbeafe";
+        out.style.color = "#1e40af";
+        out.style.display = "block";
+      }
+
+      function showError(msg) {
+        out.style.display = "block";
+        out.style.background = "#fff4f4";
+        out.style.color = "#991b1b";
+        out.style.borderColor = "#fecaca";
+        out.innerText = msg;
+      }
+
+      function calcPercent() {
+        out.style.display = "none";
+        const mode = document.querySelector(
+          'input[name="percent_mode"]:checked'
+        ).value;
+        let result = "";
+
+        // --- Mode 1: What is X% of Y? (X/100 * Y)
+        if (mode === "x_of_y") {
+          const X = validate(document.getElementById("p1_x").value, "X (%)");
+          const Y = validate(
+            document.getElementById("p1_y").value,
+            "Y (Number)"
+          );
+
+          if (X === null || Y === null) return;
+
+          result = (X / 100) * Y;
+          showResult(
+            `<strong>${X}% of ${Y}</strong> is <strong style="font-size: 1.5em; color: var(--primary);">${result.toFixed(
+              2
+            )}</strong>`
+          );
+        }
+
+        // --- Mode 2: X is what percent of Y? ((X / Y) * 100)
+        else if (mode === "x_is_what_percent") {
+          const X = validate(
+            document.getElementById("p2_x").value,
+            "Value (X)"
+          );
+          const Y = validate(
+            document.getElementById("p2_y").value,
+            "Base Number (Y)"
+          );
+
+          if (X === null || Y === null) return;
+          if (Y === 0) {
+            showError("Base number (Y) cannot be zero.");
+            return;
+          }
+
+          result = (X / Y) * 100;
+          showResult(
+            `<strong>${X} is</strong> <strong style="font-size: 1.5em; color: var(--primary);">${result.toFixed(
+              2
+            )}%</strong> <strong>of ${Y}</strong>`
+          );
+        }
+
+        // --- Mode 3: Percentage Change
+        else if (mode === "change") {
+          const initial = validate(
+            document.getElementById("p3_initial").value,
+            "Initial Value"
+          );
+          const final = validate(
+            document.getElementById("p3_final").value,
+            "Final Value"
+          );
+
+          if (initial === null || final === null) return;
+          if (initial === 0) {
+            showError(
+              "Initial value cannot be zero for percentage change calculation."
+            );
+            return;
+          }
+
+          const diff = final - initial;
+          result = (diff / initial) * 100;
+          const roundedResult = result.toFixed(2);
+          const type = result > 0 ? "Increase" : "Decrease";
+          const color = result > 0 ? "#16a34a" : "#dc2626";
+
+          showResult(`
+            <div style="font-size: 1.1em; font-weight: 600;">Percentage Change:</div> 
+            <strong style="font-size: 1.5em; color: ${color};">${Math.abs(
+            roundedResult
+          )}%</strong> 
+            <span style="color: ${color}; font-weight: 600;">(${type})</span>
+            <div style="margin-top: 5px; font-size: 0.9em;">From ${initial} to ${final}</div>
+          `);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5241710070882300"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Calcify — Simple Online Tools</title>
+    <meta
+      name="description"
+      content="Calcify: fast and simple online tools — Age Calculator, Calculator, BMI Calculator and more."
+    />
+    <style>
+      /* 1. GLOBAL RESET: This fixes the scrollbar issues */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2563eb; /* Updated to match new logo Blue */
+        --bg1: rgba(201, 221, 243, 0.9);
+        --bg2: #f7f9fc;
+        --card-bg: rgba(201, 221, 243, 0.9);
+        --muted: #666;
+        --container: 1100px;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: linear-gradient(135deg, var(--bg1), var(--bg2));
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #222;
+        min-height: 100vh;
+        overflow-x: hidden; /* Ensures no horizontal scrolling */
+      }
+
+      header {
+        width: 100%;
+        background: rgba(183, 212, 244, 0.9);
+        padding: 16px 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        /* position: sticky;
+        top: 0; */
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: -10px; /* Increased gap slightly */
+      }
+
+      /* 2. LOGO STYLING */
+      .brand svg {
+        width: 78px; /* Slightly larger to match text */
+        height: 70px;
+        display: block;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: 36px; /* Increased from 28px to look bigger */
+        color: var(--primary);
+        letter-spacing: -0.5px; /* Tighter tracking for a modern look */
+        line-height: 1;
+      }
+
+      .tag {
+        font-size: 14px;
+        color: var(--muted);
+        margin-top: 4px;
+        font-weight: 500;
+      }
+
+      main {
+        max-width: var(--container);
+        width: 100%;
+        padding: 20px 18px;
+      }
+
+      .hero {
+        display: flex;
+        flex-direction: column; /* Stack content simply */
+        align-items: flex-start; /* Left align */
+        margin-bottom: 15px;
+        max-width: 700px; /* Limits width for better readability */
+      }
+
+      .hero h2 {
+        margin: 0;
+        font-size: 36px;
+        color: #111;
+      }
+
+      .hero p {
+        color: var(--muted);
+        margin-top: 12px;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .tool {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 24px; /* Little more breathing room */
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        text-align: left;
+        transition: transform 0.2s ease;
+      }
+
+      .tool:hover {
+        transform: translateY(-2px); /* Subtle hover effect */
+      }
+
+      .tool h3 {
+        margin: 0 0 8px 0;
+        font-size: 20px;
+      }
+
+      .tool p {
+        margin: 0 0 16px 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .tool a {
+        display: inline-block;
+        padding: 10px 16px;
+        border-radius: 8px;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .tool a:hover {
+        background: #1d4ed8; /* Darker blue on hover */
+      }
+
+      footer {
+        width: 100%;
+        padding: 24px;
+        background: linear-gradient(135deg, var(--bg1), var(--bg2));
+        text-align: center;
+        color: var(--muted);
+        margin-top: auto;
+        font-size: 14px;
+      }
+
+      nav {
+        /* position: absolute;
+        right: 22px;
+        top: 50%;
+        transform: translateY(-50%);  */
+
+        /* Keep only the styling for links and margin for separation */
+        margin-left: auto; /* Pushes the nav to the far right */
+        display: flex; /* Ensures links are inline */
+        align-items: center; /* Vertically aligns links with the brand */
+        gap: 16px; /* Spacing between links */
+      }
+
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        /* margin-left: 16px; */
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      nav a:hover {
+        color: var(--primary);
+      }
+
+      @media (max-width: 640px) {
+        .brand h1 {
+          font-size: 26px;
+        }
+        .hero h2 {
+          font-size: 28px;
+        }
+        nav {
+          display: none; /* Hiding nav on very small screens or needs a menu */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <svg
+          width="48"
+          height="48"
+          viewBox="0 0 64 64"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient
+              id="brandGradient"
+              x1="32"
+              y1="4"
+              x2="32"
+              y2="60"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#4F86F7" />
+              <stop offset="1" stop-color="#2563EB" />
+            </linearGradient>
+            <filter
+              id="softShadow"
+              x="0"
+              y="0"
+              width="64"
+              height="64"
+              filterUnits="userSpaceOnUse"
+            >
+              <feDropShadow
+                dx="0"
+                dy="4"
+                stdDeviation="3"
+                flood-opacity="0.15"
+              />
+            </filter>
+          </defs>
+          <rect
+            x="12"
+            y="8"
+            width="40"
+            height="52"
+            rx="10"
+            fill="url(#brandGradient)"
+            filter="url(#softShadow)"
+          />
+          <rect
+            x="18"
+            y="16"
+            width="28"
+            height="10"
+            rx="3"
+            fill="white"
+            fill-opacity="0.9"
+          />
+          <circle cx="22" cy="36" r="3.5" fill="white" fill-opacity="0.9" />
+          <circle cx="32" cy="36" r="3.5" fill="white" fill-opacity="0.9" />
+          <circle cx="42" cy="36" r="3.5" fill="white" fill-opacity="0.9" />
+          <circle cx="22" cy="47" r="3.5" fill="white" fill-opacity="0.9" />
+          <circle cx="32" cy="47" r="3.5" fill="white" fill-opacity="0.9" />
+          <circle cx="42" cy="47" r="3.5" fill="white" fill-opacity="0.9" />
+        </svg>
+
+        <div>
+          <h1>Calcify</h1>
+          <div class="tag">Simple Tools. Instant Results.</div>
+        </div>
+      </div>
+      <nav>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy-policy.html">Privacy</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-left">
+          <h2>Fast, clean, and reliable tools</h2>
+          <p>
+            Calcify hosts small tools that people use every day — calculators,
+            converters and utilities that are lightweight, private (run in your
+            browser) and ad-friendly.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <div class="tools-grid">
+          <div class="tool">
+            <h3>Age Calculator</h3>
+            <p>
+              Find your exact age in years, months, and days. Works offline in
+              your browser.
+            </p>
+            <a href="age.html">Open tool →</a>
+          </div>
+
+          <div class="tool">
+            <h3>Basic Calculator</h3>
+            <p>
+              A simple, responsive calculator for daily use — add, subtract,
+              multiply, divide and more.
+            </p>
+            <a href="calculator.html">Open tool →</a>
+          </div>
+
+          <div class="tool">
+            <h3>BMI Calculator</h3>
+            <p>
+              Calculate Body Mass Index (BMI) and get a quick classification.
+            </p>
+            <a href="bmi.html">Open tool →</a>
+          </div>
+
+          <!-- NEW: Unit Converter -->
+          <div class="tool">
+            <h3>Unit Converter</h3>
+            <p>
+              Convert between length, weight, temperature, area, volume, speed,
+              time and digital storage.
+            </p>
+            <a href="unit-converter.html">Open tool →</a>
+          </div>
+
+          <!-- NEW: Percentage Calculator -->
+          <div class="tool">
+            <h3>Percentage Calculator</h3>
+            <p>
+              Quickly find percentage of a number, increase or decrease a number
+              by a percent.
+            </p>
+            <a href="percentage.html">Open tool →</a>
+          </div>
+
+          <div class="tool">
+            <h3>More tools</h3>
+            <p>
+              We'll add converters, timers, and other useful utilities to
+              Calcify soon.
+            </p>
+            <a href="about.html">Learn more →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © 2025 Calcify.
+      <a
+        href="privacy-policy.html"
+        style="color: inherit; text-decoration: underline"
+        >Privacy Policy</a
+      >
+      •
+      <a href="terms.html" style="color: inherit; text-decoration: underline"
+        >Terms</a
+      >
+    </footer>
+  </body>
+</html>
