@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Journal</title>
+    <style>
+      /* CSS VARIABLES FOR EASY THEMING */
+      :root {
+        --bg-color: #ffffff;
+        --secondary-bg: #f9fafb;
+        --text-main: #111827;
+        --text-muted: #6b7280;
+        --border-color: #e5e7eb;
+        --accent: #111827;
+        --accent-hover: #374151;
+      }
+
+      /* RESET & BASE STYLES */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        background-color: var(--secondary-bg);
+        color: var(--text-main);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* LOGIN CARD */
+      .login-container {
+        width: 100%;
+        max-width: 420px;
+        padding: 20px;
+      }
+
+      .login-card {
+        background: var(--bg-color);
+        padding: 48px 40px;
+        border-radius: 16px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      }
+
+      header {
+        margin-bottom: 32px;
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+        font-style: italic;
+      }
+
+      .subtitle {
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+
+      /* FORM ELEMENTS */
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      .input-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.2s;
+        background-color: #fff;
+      }
+
+      .input-group input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(17, 24, 39, 0.05);
+      }
+
+      .form-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 28px;
+        font-size: 13px;
+      }
+
+      .checkbox-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-muted);
+        cursor: pointer;
+      }
+
+      .forgot-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .forgot-link:hover {
+        text-decoration: underline;
+      }
+
+      /* BUTTONS */
+      button {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .btn-primary {
+        background-color: var(--accent);
+        color: white;
+        border: none;
+        margin-bottom: 12px;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--accent-hover);
+      }
+
+      .btn-secondary {
+        background-color: white;
+        color: var(--text-main);
+        border: 1px solid var(--border-color);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--secondary-bg);
+        border-color: #d1d5db;
+      }
+
+      /* FOOTER */
+      footer {
+        margin-top: 32px;
+        text-align: center;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      footer a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-card">
+        <header>
+          <h1 class="logo">Calcify</h1>
+          <p class="subtitle">
+            Enter your credentials to access your timeline.
+          </p>
+        </header>
+
+        <form id="loginForm">
+          <div class="input-group">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="••••••••"
+              required
+            />
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-container">
+              <input type="checkbox" />
+              Remember me
+            </label>
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary">Sign in</button>
+
+          <button type="button" class="btn-secondary">
+            <img
+              src="https://www.svgrepo.com/show/355037/google.svg"
+              alt="Google"
+              width="16"
+            />
+            Continue with Google
+          </button>
+        </form>
+
+        <footer>
+          <p>New here? <a href="#">Create an account</a></p>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      // Simple script to handle form submission for demo purposes
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          alert("Login successful! Redirecting to your journal...");
+          // In a real app, you would use: window.location.href = 'calendar.html';
+        });
+    </script>
+  </body>
+</html>
